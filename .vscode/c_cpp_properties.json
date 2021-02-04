@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "VIT University",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/lib/gcc/**",
+                    "/usr/include/**"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}
