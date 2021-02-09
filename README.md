@@ -2,6 +2,7 @@
 
 My CSE1002 Object Oriented Programming Notebook
 
+## Compilation & Execution
 
 ### Compiling a C program using GCC compiler
 
