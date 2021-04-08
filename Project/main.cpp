@@ -398,15 +398,8 @@ const menu_option menu_options[]{
  * 
  * @returns `0` if user inputs exit option.
 */
-int show_menu(bool pause = true)
+int show_menu()
 {
-    if (pause)
-    {
-        cout << endl
-             << "Press any key to continue..." << endl;
-        default_input(new char);
-    }
-
     int selection = 0;
     for (auto const &option : menu_options)
         cout << '[' << selection++ << "]\t" << option.first << endl;
@@ -436,11 +429,13 @@ int main()
              << "+-------------------------------------------------------------+" << endl
              << endl;
 
-        show_menu(false);
-
         // Event loop of the program
-        while (show_menu() != 0)
-            ;
+        while (show_menu())
+        {
+            cout << endl
+                 << "Press any key to continue..." << endl;
+            default_input(new char);
+        }
 
         return 0;
     }
