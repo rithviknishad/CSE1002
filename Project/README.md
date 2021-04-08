@@ -19,5 +19,5 @@ Whenever a customer wants a book, the sales person inputs the `title` and `autho
 **To compile & run:**
 
 ```sh
-g++ main.cpp -o "bin/main.exe" && "./bin/main.exe"
+c++ main.cpp -o "bin/main.exe" && "./bin/main.exe"
 ```
