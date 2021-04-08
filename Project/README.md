@@ -11,3 +11,13 @@ Whenever a customer wants a book, the sales person inputs the `title` and `autho
 - [x] The `price` of the books should be updated as and when required. Use a `private` member function to implement this.
 - [x] The stock value of each book should be automatically updated as soon as a transaction is completed.
 - [x] The number of `successful` and `unsuccessful` transactions should be recorded for the purpose of statistical analysis. Use `static` data members to keep count of transactions.
+
+## Building the binaries
+
+*Pre-built binaries are available in the `bin` folder.*
+
+**To compile manually:**
+
+```sh
+g++ main.cpp -o "bin/main.exe" && "./bin/main.exe"
+```
