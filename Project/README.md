@@ -16,7 +16,7 @@ Whenever a customer wants a book, the sales person inputs the `title` and `autho
 
 *Pre-built binaries are available in the `bin` folder.*
 
-**To compile manually:**
+**To compile & run:**
 
 ```sh
 g++ main.cpp -o "bin/main.exe" && "./bin/main.exe"
