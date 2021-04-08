@@ -21,3 +21,9 @@ Whenever a customer wants a book, the sales person inputs the `title` and `autho
 ```sh
 c++ main.cpp -o "bin/<platform>-<architecture>" && "./bin/<platform>-<architecture>"
 ```
+
+## Output Screenshots
+
+![Page 1](https://github.com/rithviknishad/CSE1002/blob/ebf5a271174c23e1dd4307d96ff66d4fd672d924/Project/screenshots/1.png)
+![Page 2](https://github.com/rithviknishad/CSE1002/blob/ebf5a271174c23e1dd4307d96ff66d4fd672d924/Project/screenshots/2.png)
+![Page 3](https://github.com/rithviknishad/CSE1002/blob/ebf5a271174c23e1dd4307d96ff66d4fd672d924/Project/screenshots/3.png)
