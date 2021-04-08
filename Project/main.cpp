@@ -142,6 +142,21 @@ public:
     */
     int stock_position() { return m_StockPosition; }
 
+    /** 
+     * @returns The number of successful transactions occured in this runtime.
+    */
+    static int successful_transactions() { return _successful_transactions; }
+
+    /** 
+     * @returns The number of unsuccessful transactions occured in this runtime.
+    */
+    static int unsuccessful_transactions() { return _unsuccessful_transactions; }
+
+    /** 
+     * @returns The total number of transactions occured in this runtime.
+    */
+    static int total_transactions() { return _successful_transactions + _unsuccessful_transactions; }
+
 private:
     // typedef for { Author : { Title : (Book *) } }
     using __BOOK_DB__ = map<string, map<string, Book *>>;
@@ -156,10 +171,10 @@ private:
     static __BOOK_DB__ inventory_map;
 
     /**
-     * @param successful_transactions The number of successful transactions for analytics purpose.
-     * @param unsuccessful_transactions The number of unsuccessful transactions for analytics purpose.
+     * @param _successful_transactions The number of successful transactions for analytics purpose.
+     * @param _unsuccessful_transactions The number of unsuccessful transactions for analytics purpose.
     */
-    static int successful_transactions, unsuccessful_transactions;
+    static int _successful_transactions, _unsuccessful_transactions;
 
     /**
      * Converts the string to a valid key for handling inventory.
@@ -253,10 +268,10 @@ private:
             if (default_input(new char))
             {
                 m_StockPosition -= takes;
-                successful_transactions++;
+                _successful_transactions++;
             }
             else
-                unsuccessful_transactions++;
+                _unsuccessful_transactions++;
         }
     }
 
@@ -268,8 +283,8 @@ private:
 };
 
 Book::__BOOK_DB__ Book::inventory_map = __BOOK_DB__();
-int Book::successful_transactions = 0;
-int Book::unsuccessful_transactions = 0;
+int Book::_successful_transactions = 0;
+int Book::_unsuccessful_transactions = 0;
 
 /** 
  * Populates the inventory with demo data.
@@ -354,47 +369,57 @@ void update_inventory()
 }
 
 /** 
+ * Menu option driver show analytics parameters.
+*/
+void show_analytics()
+{
+    cout << endl
+         << "Analytics: " << endl
+         << endl
+         << "Successful Transactions   :    " << Book::successful_transactions() << endl
+         << "Unsuccessful Transactions :    " << Book::unsuccessful_transactions() << endl
+         << "Total Transactions        :    " << Book::total_transactions() << endl
+         << endl;
+}
+
+using menu_option_cb = auto (*)() -> void;
+using menu_option = pair<string, menu_option_cb>;
+
+const menu_option menu_options[]{
+    menu_option("Exit", [] {}),
+    menu_option("Check-out book", take_a_book),
+    menu_option("Show all available books", Book::show_inventory),
+    menu_option("Update / Add Book to Inventory", update_inventory),
+    menu_option("Show analytics", show_analytics),
+};
+
+/** 
  * Menu driver.
  * 
  * @returns `0` if user inputs exit option.
 */
-int show_menu()
+int show_menu(bool pause = true)
 {
-    using menu_option_callback = auto (*)()->void;
-    using menu_option = pair<string, menu_option_callback>;
-
-    const menu_option menu_options[]{
-        menu_option("Exit", [] {}),
-        menu_option("Check-out book", take_a_book),
-        menu_option("Show all available books", Book::show_inventory),
-        menu_option("Update / Add Book to Inventory", update_inventory),
-    };
-
-    // system("clear"); // Clear the screen (deprecating as platform dependent)
-    cout << endl
-         << "+-------------------------------------------------------------+" << endl
-         << "|   Welcome to Rithvik's Book Inventory Management Software   |" << endl
-         << "+-------------------------------------------------------------+" << endl
-         << endl;
+    if (pause)
+    {
+        cout << endl
+             << "Press any key to continue..." << endl;
+        default_input(new char);
+    }
 
     int selection = 0;
-
     for (auto const &option : menu_options)
         cout << '[' << selection++ << "]\t" << option.first << endl;
+    selection = 0;
 
     cout << endl
          << "Enter menu option (number) (0 or [Enter] to exit): ";
-
-    selection = 0;
-
     if (default_input(&selection))
         return 0;
 
     cout << endl
          << endl;
-
     menu_options[selection].second();
-
     return selection;
 }
 
@@ -404,6 +429,15 @@ int main()
 
     try
     {
+        // system("clear"); // Clear the screen (deprecating as platform dependent)
+        cout << endl
+             << "+-------------------------------------------------------------+" << endl
+             << "|   Welcome to Rithvik's Book Inventory Management Software   |" << endl
+             << "+-------------------------------------------------------------+" << endl
+             << endl;
+
+        show_menu(false);
+
         // Event loop of the program
         while (show_menu() != 0)
             ;
