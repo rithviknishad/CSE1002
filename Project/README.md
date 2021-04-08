@@ -19,5 +19,5 @@ Whenever a customer wants a book, the sales person inputs the `title` and `autho
 **To compile & run:**
 
 ```sh
-c++ main.cpp -o "bin/<platform>-<architecture>.exe" && "./bin/<platform>-<architecture>.exe"
+c++ main.cpp -o "bin/<platform>-<architecture>" && "./bin/<platform>-<architecture>"
 ```
